@@ -23,7 +23,8 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import LoadingButton from '@mui/lab/LoadingButton';
 // import OutlinedInput from '@mui/material/OutlinedInput';
-import Flag from 'react-world-flags'
+import Flag from 'react-world-flags';
+import { countryToAlpha2 } from "country-to-iso";
 
 import Scrollbar from 'src/components/scrollbar';
 import Searchbar from 'src/sections/overview/searchbar';
@@ -48,11 +49,6 @@ const style = {
 
 export default function AdminDashboard() {
 
-  
-  
-
-  
-
   // --------------------------country start--------------------
 
   const [open, setOpen] = useState(false);
@@ -71,10 +67,13 @@ export default function AdminDashboard() {
  
   const [checkedCountries, setCheckedCountries] = useState([]);
  
-  const handleCountryToggle = (countryId) => {
+  const handleCountryToggle = (countryName) => {
     setCheckedCountries(prevState => {
       const updatedState = { ...prevState };
-      updatedState[countryId] = !prevState[countryId];
+      updatedState[countryName] = !prevState[countryName];
+      Object.keys(prevState).forEach(key => {
+        updatedState[key] = key === countryName;
+      });
       return updatedState;
     });
   };
@@ -123,13 +122,12 @@ export default function AdminDashboard() {
 
     add_country(newCountry.title, newCountry.score, newCountry.value)
     .then(() => {
-      console.log("dispatch success");
+      console.log("Adding Country SUCCESS!!!");
     })
     .catch(() => {
       console.log("failed");
     });
   }
-  console.log(countries)
   const renderCountry = (
     <Grid>
       {countries.map((item, index) => (
@@ -160,8 +158,6 @@ export default function AdminDashboard() {
 
   const handleCloseCityModal = () => setOpenCityModal(false);
 
-  
-  
   const countries1 = Object.keys(CITIES);
   let allcities = [];
   
@@ -197,11 +193,11 @@ export default function AdminDashboard() {
         score: difficultyScore,
         country,
       };
-      const CheckExistingCountry = countries.some(item => item.value === newCity.country);
+      const CheckExistingCountry = countries.some(item => item.title === newCity.country);
         // fixed in this code
-      if ((!CheckExistingCountry)&&(CheckExistingCountry === checkedCountries)) {                          
-        setCountries(prevCountres => [...prevCountres, {title:newCity.country, score:10, value:"AU"}]);
-        add_country(newCity.country, 10, "AU")
+      if (!CheckExistingCountry) {                    
+        setCountries(prevCountres => [...prevCountres, {title: newCity.country, score: 10, value: countryToAlpha2(newCity.country)}]);
+        add_country(newCity.country, 10, countryToAlpha2(newCity.country));
       }
 
       setCities(prevCities => [...prevCities, newCity]);
@@ -427,10 +423,13 @@ function CountryItem({ item1 }) {
  
   const [checkedCountries, setCheckedCountries] = useState([]);
  
-  const handleCountryToggle = (countryId) => {
+  const handleCountryToggle = (countryName) => {
     setCheckedCountries(prevState => {
       const updatedState = { ...prevState };
-      updatedState[countryId] = !prevState[countryId];
+      updatedState[countryName] = !prevState[countryName];
+      Object.keys(prevState).forEach(key => {
+        updatedState[key] = key === countryName;
+      });
       return updatedState;
     });
   };
@@ -562,9 +561,6 @@ function CountryItem({ item1 }) {
             value={city}
             onChange={handleChange}
             sx={{ color:'#0D0C0C', fontSize: '14px', fontWeight: '400'}}
-            // sx={{ color:'#0D0C0C', fontSize: '14px', fontWeight: '400', '& .MuiOutlinedInput-root .MuiSelect-notchedOutline': { display: 'none' }}}
-            // inputProps={{ notched: false }}
-            // input={<OutlinedInput notched={false} label="States and Cities" />}
           >
             <MenuItem value="">Select Continent</MenuItem>
             <MenuItem value='Africa'>Africa</MenuItem>
@@ -587,7 +583,6 @@ function CityItem({item2}) {
 
   const [objectitem, setObjectItem] = useState({ ...item2 });
 
-  console.log(objectitem)
   const [openCityModal, setOpenCityModal] = useState(false);
 
   const handleOpenCityModal = () => setOpenCityModal(true);

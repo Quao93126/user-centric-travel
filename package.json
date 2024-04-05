@@ -4,9 +4,12 @@
   "licence": "MIT",
   "version": "1.8.0",
   "private": false,
+  "engines": {
+    "node": ">=18.18.0 <19.0.0"
+  },
   "scripts": {
     "dev": "vite",
-    "start": "vite preview",
+    "start": "vite preview --port 1000",
     "build": "vite build",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",

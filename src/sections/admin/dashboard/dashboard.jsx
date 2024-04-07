@@ -33,7 +33,7 @@ import axios from "axios";
 import { CITIES } from 'src/_mock/cities';
 
 
-const API_URL = "http://localhost:5000/users/";
+const API_URL = "https://user-centric-travel-backend.onrender.com/users/";
 // ----------------------------------------------------------------------
 const style = {
   position: 'absolute',

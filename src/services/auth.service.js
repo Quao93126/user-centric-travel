@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/users/";
+const API_URL = "https://user-centric-travel-backend.onrender.com/users/";
 
 const register = (username, email, password) => axios.post(`${API_URL}register`, { username, email, password });
 

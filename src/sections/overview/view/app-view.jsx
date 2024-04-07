@@ -20,7 +20,7 @@ import Scrollbar from 'src/components/scrollbar';
 
 import Searchbar from '../searchbar';
 
-const API_URL = "http://localhost:5000/users/";
+const API_URL = "https://user-centric-travel-backend.onrender.com/users/";
 const style = {
   position: 'absolute',
   top: '50%',

@@ -1,5 +1,8 @@
+## my email:
+nado.gemini62@gmail.com
 
-
+## My skype:
+live:.cid.4b17964c0b204494
 
 ## Quick start
 

@@ -1,4 +1,10 @@
+## my email:
+nadogemini62@gmail.com
 
+## my skype:
+live:.cid.4b17964c0b204494
+
+## Important: We can't tell about skype or email in freelancer.
 
 ## Quick start
 

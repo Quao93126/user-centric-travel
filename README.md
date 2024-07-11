@@ -10,7 +10,6 @@
 
 ## Contact us
 
-hi, there. are you there ?
 
 React CI/CD hosting in Render Dashboard has been failed. So I made the build version and uploaded to your Github Repository.
 
